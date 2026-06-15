@@ -3,7 +3,7 @@
  * Plugin Name:       ADNetwork — Advertising Network Platform
  * Plugin URI:        https://adnetwork.management
  * Description:       Vollständige Werbenetzwerk-Plattform. Module: Kampagnen, Publisher, Surfbar, GSC-Coin, Referral, PaidMails, Walls, Spiele, Finanzen. Jedes Modul einzeln aktivierbar.
- * Version:           4.0.5
+ * Version:           4.0.6
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            123-Next-Generation-Marketing
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin Constants
-define('ADN_VERSION', '4.0.5');
+define('ADN_VERSION', '4.0.6');
 define('ADN_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('ADN_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADN_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -30,6 +30,11 @@ require_once ADN_PLUGIN_DIR . 'vendor/autoload.php';
 
 // Main Plugin Class
 use ADNetwork\Core\Plugin;
+
+// Shortcode Compatibility (alte Shortcodes als Aliase)
+add_action('init', function () {
+    new ADNetwork\Core\ShortcodeCompat();
+});
 
 // Initialize
 add_action('plugins_loaded', function () {
