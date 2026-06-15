@@ -23,6 +23,9 @@ class Plugin {
     /** @var Logger */
     public $logger;
     
+    /** @var Hub */
+    public $hub;
+    
     private function __construct() {
         $this->loadCore();
         $this->initModules();
@@ -44,6 +47,7 @@ class Plugin {
         $this->database = new Database();
         $this->logger = new Logger();
         $this->modules = new ModuleManager($this);
+        $this->hub = new Hub();
     }
     
     /**
@@ -125,6 +129,13 @@ class Plugin {
         wp_enqueue_style(
             'adnetwork-frontend',
             ADN_PLUGIN_URL . 'assets/css/frontend.css',
+            [],
+            ADN_VERSION
+        );
+        
+        wp_enqueue_style(
+            'adnetwork-hub',
+            ADN_PLUGIN_URL . 'assets/css/hub.css',
             [],
             ADN_VERSION
         );
