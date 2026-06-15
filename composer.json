@@ -1,0 +1,15 @@
+{
+    "name": "123ngm/adnetwork-plugin",
+    "description": "ADNetwork — Advertising Network Platform for WordPress",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ADNetwork\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
