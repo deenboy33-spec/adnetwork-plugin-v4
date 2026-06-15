@@ -2,14 +2,15 @@
 /**
  * Installer
  * 
- * Erstellt automatisch alle benötigten WordPress-Seiten beim Plugin-Aktivieren.
+ * Erstellt automatisch alle benötigten WordPress-Seilen beim Plugin-Aktivieren.
+ * Aktualisiert bestehende Seilen statt neue zu erstellen.
  */
 
 namespace ADNetwork\Core;
 
 class Installer {
     
-    /** @var array Standard-Seiten mit Shortcodes */
+    /** @var array Standard-Seilen mit Shortcodes */
     private $defaultPages = [
         'login' => [
             'title' => 'Login',
@@ -108,24 +109,41 @@ class Installer {
     }
     
     /**
-     * Alle Standard-Seiten erstellen
+     * Alle Standard-Seilen erstellen oder aktualisieren
      */
-    private function createPages(): void {
-        $createdPages = [];
+    public function createPages(): void {
+        $createdPages = get_option('adnetwork_pages', []);
         
         foreach ($this->defaultPages as $key => $pageData) {
-            // Prüfen ob Seite schon existiert
-            $existing = $this->getPageBySlug('adnetwork-' . $key);
+            $slug = 'adnetwork-' . $key;
+            
+            // Prüfen ob Seile schon existiert
+            $existing = $this->getPageBySlug($slug);
             
             if ($existing) {
                 $createdPages[$key] = $existing->ID;
                 continue;
             }
             
-            // Seite erstellen
+            // Auch nach alten wf-* Slugs suchen
+            $oldSlug = 'wf-' . $key;
+            $oldPage = $this->getPageBySlug($oldSlug);
+            
+            if ($oldPage) {
+                // Alte Seile aktualisieren statt neue zu erstellen
+                wp_update_post([
+                    'ID' => $oldPage->ID,
+                    'post_name' => $slug,
+                    'post_title' => $pageData['title'],
+                ]);
+                $createdPages[$key] = $oldPage->ID;
+                continue;
+            }
+            
+            // Neue Seile erstellen
             $pageId = wp_insert_post([
                 'post_title'   => $pageData['title'],
-                'post_name'    => 'adnetwork-' . $key,
+                'post_name'    => $slug,
                 'post_content' => $pageData['content'],
                 'post_status'  => $pageData['status'],
                 'post_type'    => 'page',
@@ -137,12 +155,12 @@ class Installer {
             }
         }
         
-        // Seiten-IDs speichern
+        // Seilen-IDs speichern
         update_option('adnetwork_pages', $createdPages);
     }
     
     /**
-     * Seite anhand des Slugs finden
+     * Seile anhand des Slugs finden
      */
     private function getPageBySlug(string $slug): ?\WP_Post {
         $query = new \WP_Query([
@@ -195,7 +213,7 @@ class Installer {
     }
     
     /**
-     * Seiten-URL abrufen
+     * Seilen-URL abrufen
      */
     public static function getPageUrl(string $pageKey): string {
         $pages = get_option('adnetwork_pages', []);
@@ -208,7 +226,7 @@ class Installer {
     }
     
     /**
-     * Alle erstellten Seiten abrufen
+     * Alle erstellten Seilen abrufen
      */
     public static function getPages(): array {
         return get_option('adnetwork_pages', []);
