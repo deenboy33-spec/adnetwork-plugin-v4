@@ -2,8 +2,7 @@
 /**
  * Upgrader
  * 
- * Aktualisiert bestehende Seiten beim Plugin-Update.
- * Ersetzt alte Shortcodes ([wf_*]) durch neue ([adnetwork_*]).
+ * Aktualisiert bestehende Seiten, Menüs und Shortcodes beim Plugin-Update.
  */
 
 namespace ADNetwork\Core;
@@ -38,7 +37,10 @@ class Upgrader {
         // 1. Alte Shortcodes in ALLEN Seiten ersetzen
         $instance->updateAllPages();
         
-        // 2. Fehlende Seiten erstellen
+        // 2. Menü-Einträge aktualisieren
+        $instance->updateMenus();
+        
+        // 3. Fehlende Seiten erstellen
         $instance->createMissingPages();
     }
     
@@ -72,6 +74,13 @@ class Upgrader {
                 ]);
             }
         }
+    }
+    
+    /**
+     * Menü-Einträge aktualisieren
+     */
+    private function updateMenus(): void {
+        MenuUpdater::update();
     }
     
     /**
