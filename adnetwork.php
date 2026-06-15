@@ -39,7 +39,13 @@ add_action('plugins_loaded', function () {
 // Activation Hook
 register_activation_hook(__FILE__, function () {
     require_once ADN_PLUGIN_DIR . 'src/Core/Database.php';
+    require_once ADN_PLUGIN_DIR . 'src/Core/Installer.php';
+    
+    // Datenbank-Tabellen erstellen
     ADNetwork\Core\Database::activate();
+    
+    // Standard-Seiten erstellen
+    ADNetwork\Core\Installer::install();
 });
 
 // Deactivation Hook
