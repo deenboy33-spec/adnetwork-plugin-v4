@@ -24,6 +24,12 @@ class ShortcodeCompat {
         // GSC Info
         add_shortcode('wf_gsc_info', [$this, 'renderGSCInfo']);
         
+        // News
+        add_shortcode('wf_news', [$this, 'renderNews']);
+        
+        // Walls
+        add_shortcode('wf_walls', [$this, 'renderWalls']);
+        
         // Alte Login/Register (Fallback)
         add_shortcode('wf_login', [$this, 'renderLogin']);
         add_shortcode('wf_register', [$this, 'renderRegister']);
@@ -35,6 +41,7 @@ class ShortcodeCompat {
         
         // Alte Kampagnen
         add_shortcode('wf_campaigns', [$this, 'renderCampaigns']);
+        add_shortcode('wf_campaign', [$this, 'renderCampaigns']);
         
         // Alte Publisher
         add_shortcode('wf_publisher', [$this, 'renderPublisher']);
@@ -42,16 +49,41 @@ class ShortcodeCompat {
         // Alte Spiele
         add_shortcode('wf_surfbar', [$this, 'renderSurfbar']);
         add_shortcode('wf_click4win', [$this, 'renderClick4Win']);
+        add_shortcode('wf_click2win', [$this, 'renderClick4Win']);
         add_shortcode('wf_luckywheel', [$this, 'renderLuckyWheel']);
+        add_shortcode('wf_lucky_wheel', [$this, 'renderLuckyWheel']);
+        add_shortcode('wf_searchgame', [$this, 'renderSearchGame']);
+        add_shortcode('wf_search_game', [$this, 'renderSearchGame']);
+        add_shortcode('wf_coinflip', [$this, 'renderCoinFlip']);
+        add_shortcode('wf_coin_flip', [$this, 'renderCoinFlip']);
+        add_shortcode('wf_dice', [$this, 'renderDice']);
+        add_shortcode('wf_rally', [$this, 'renderRally']);
+        add_shortcode('wf_rallies', [$this, 'renderRally']);
+        add_shortcode('wf_cashback', [$this, 'renderCashback']);
+        add_shortcode('wf_jackpot', [$this, 'renderJackpot']);
         
         // Alte Finanzen
         add_shortcode('wf_referrals', [$this, 'renderReferrals']);
+        add_shortcode('wf_referral', [$this, 'renderReferrals']);
         add_shortcode('wf_balance', [$this, 'renderBalance']);
         add_shortcode('wf_payout', [$this, 'renderPayout']);
+        add_shortcode('wf_payouts', [$this, 'renderPayout']);
+        
+        // PaidMails
+        add_shortcode('wf_paidmail', [$this, 'renderPaidMail']);
+        add_shortcode('wf_paidmails', [$this, 'renderPaidMail']);
+        add_shortcode('wf_mail', [$this, 'renderPaidMail']);
         
         // Alte Info-Seiten
         add_shortcode('wf_faq', [$this, 'renderFAQ']);
         add_shortcode('wf_contact', [$this, 'renderContact']);
+        add_shortcode('wf_terms', [$this, 'renderTerms']);
+        add_shortcode('wf_privacy', [$this, 'renderPrivacy']);
+        add_shortcode('wf_imprint', [$this, 'renderImprint']);
+        
+        // Dashboard / Übersicht
+        add_shortcode('wf_dashboard', [$this, 'renderDashboard']);
+        add_shortcode('wf_overview', [$this, 'renderDashboard']);
     }
     
     /**
@@ -59,7 +91,6 @@ class ShortcodeCompat {
      */
     public function renderHub($atts): string {
         $atts = shortcode_atts(['type' => 'paid4'], $atts, 'wf_hub');
-        
         $type = sanitize_text_field($atts['type']);
         
         ob_start();
@@ -77,6 +108,27 @@ class ShortcodeCompat {
      */
     public function renderGSCInfo($atts): string {
         return do_shortcode('[adnetwork_gsc_info]');
+    }
+    
+    /**
+     * News (Alias)
+     */
+    public function renderNews($atts): string {
+        return do_shortcode('[adnetwork_news]');
+    }
+    
+    /**
+     * Walls (Alias)
+     */
+    public function renderWalls($atts): string {
+        return do_shortcode('[adnetwork_walls]');
+    }
+    
+    /**
+     * Dashboard (Alias)
+     */
+    public function renderDashboard($atts): string {
+        return do_shortcode('[adnetwork_dashboard]');
     }
     
     /**
@@ -150,6 +202,55 @@ class ShortcodeCompat {
     }
     
     /**
+     * Search Game (Alias)
+     */
+    public function renderSearchGame($atts): string {
+        return do_shortcode('[adnetwork_searchgame]');
+    }
+    
+    /**
+     * CoinFlip (Alias)
+     */
+    public function renderCoinFlip($atts): string {
+        return do_shortcode('[adnetwork_coinflip]');
+    }
+    
+    /**
+     * Dice (Alias)
+     */
+    public function renderDice($atts): string {
+        return do_shortcode('[adnetwork_dice]');
+    }
+    
+    /**
+     * Rally (Alias)
+     */
+    public function renderRally($atts): string {
+        return do_shortcode('[adnetwork_rally]');
+    }
+    
+    /**
+     * Cashback (Alias)
+     */
+    public function renderCashback($atts): string {
+        return do_shortcode('[adnetwork_cashback]');
+    }
+    
+    /**
+     * Jackpot (Alias)
+     */
+    public function renderJackpot($atts): string {
+        return do_shortcode('[adnetwork_jackpot]');
+    }
+    
+    /**
+     * PaidMail (Alias)
+     */
+    public function renderPaidMail($atts): string {
+        return do_shortcode('[adnetwork_paidmail]');
+    }
+    
+    /**
      * Referrals (Alias)
      */
     public function renderReferrals($atts): string {
@@ -182,5 +283,26 @@ class ShortcodeCompat {
      */
     public function renderContact($atts): string {
         return do_shortcode('[adnetwork_contact]');
+    }
+    
+    /**
+     * Terms (Alias)
+     */
+    public function renderTerms($atts): string {
+        return do_shortcode('[adnetwork_terms]');
+    }
+    
+    /**
+     * Privacy (Alias)
+     */
+    public function renderPrivacy($atts): string {
+        return do_shortcode('[adnetwork_privacy]');
+    }
+    
+    /**
+     * Imprint (Alias)
+     */
+    public function renderImprint($atts): string {
+        return do_shortcode('[adnetwork_imprint]');
     }
 }
