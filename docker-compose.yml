@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: adnetwork-wp-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: adnetwork_wp
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - adnetwork-net
+
+  wordpress:
+    image: wordpress:latest
+    container_name: adnetwork-wp
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: adnetwork_wp
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_pass
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - wp_data:/var/www/html
+      - ~/Projects/ADNetwork-4.0:/var/www/html/wp-content/plugins/adnetwork:ro
+    ports:
+      - "8080:80"
+    networks:
+      - adnetwork-net
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  adnetwork-net:
+    driver: bridge

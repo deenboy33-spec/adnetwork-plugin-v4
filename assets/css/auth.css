@@ -1,0 +1,183 @@
+/* ADNetwork Auth Styles */
+
+.adnetwork-auth-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.adnetwork-auth-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.adnetwork-form-group {
+    margin-bottom: 15px;
+}
+
+.adnetwork-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.adnetwork-form-group input,
+.adnetwork-form-group select,
+.adnetwork-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.adnetwork-form-group input:focus,
+.adnetwork-form-group select:focus,
+.adnetwork-form-group textarea:focus {
+    border-color: #2271b1;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(34,113,177,0.2);
+}
+
+.adnetwork-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.adnetwork-btn-primary {
+    background: #2271b1;
+    color: #fff;
+    width: 100%;
+}
+
+.adnetwork-btn-primary:hover {
+    background: #135e96;
+}
+
+.adnetwork-btn-danger {
+    background: #d63638;
+    color: #fff;
+}
+
+.adnetwork-btn-danger:hover {
+    background: #b32d2e;
+}
+
+.adnetwork-error {
+    background: #d63638;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.adnetwork-success {
+    background: #00a32a;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.adnetwork-auth-links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.adnetwork-auth-links a {
+    color: #2271b1;
+    text-decoration: none;
+}
+
+.adnetwork-auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Profile Styles */
+.adnetwork-profile {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.adnetwork-profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.adnetwork-profile-info,
+.adnetwork-profile-edit {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.adnetwork-profile-info h3,
+.adnetwork-profile-edit h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Account Dashboard */
+.adnetwork-account {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.adnetwork-account-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.adnetwork-account-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.adnetwork-account-menu li {
+    margin: 10px 0;
+}
+
+.adnetwork-account-menu a {
+    display: block;
+    padding: 10px 15px;
+    background: #f0f0f1;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.adnetwork-account-menu a:hover {
+    background: #2271b1;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .adnetwork-profile-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .adnetwork-auth-container {
+        padding: 20px;
+    }
+}
