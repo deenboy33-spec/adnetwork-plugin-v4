@@ -172,8 +172,10 @@ class Auth {
         $wpdb->insert($table, [
             'user_id' => $user_id,
             'role' => $role,
-            'balance' => $this->plugin->settings->get('default_user_balance', 0),
-            'gsc_balance' => 0,
+            'balance_cp' => $this->plugin->settings->get('start_balance_cp', 0),
+            'balance_gsc' => $this->plugin->settings->get('start_balance_gsc', 0),
+            'balance_bp' => $this->plugin->settings->get('start_balance_bp', 0),
+            'balance_sh' => $this->plugin->settings->get('start_balance_sh', 0),
             'referral_code' => $referral_code,
             'country' => $country,
             'status' => 'active',

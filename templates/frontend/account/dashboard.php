@@ -16,13 +16,23 @@ $profile = $profile ?? null;
     
     <div class="adnetwork-account-stats">
         <div class="adnetwork-stat-card">
-            <h3><?php _e('Balance', 'adnetwork'); ?></h3>
-            <div class="adnetwork-stat-number"><?php echo number_format($profile->balance ?? 0, 2); ?> €</div>
+            <h3><?php _e('CashPoints', 'adnetwork'); ?></h3>
+            <div class="adnetwork-stat-number"><?php echo number_format($profile->balance_cp ?? 0, 2); ?> CP</div>
         </div>
         
         <div class="adnetwork-stat-card">
-            <h3><?php _e('GSC Balance', 'adnetwork'); ?></h3>
-            <div class="adnetwork-stat-number"><?php echo number_format($profile->gsc_balance ?? 0, 8); ?> GSC</div>
+            <h3><?php _e('GoldSurferCoins', 'adnetwork'); ?></h3>
+            <div class="adnetwork-stat-number"><?php echo number_format($profile->balance_gsc ?? 0, 8); ?> GSC</div>
+        </div>
+        
+        <div class="adnetwork-stat-card">
+            <h3><?php _e('Boost Punkte', 'adnetwork'); ?></h3>
+            <div class="adnetwork-stat-number"><?php echo number_format($profile->balance_bp ?? 0, 0); ?> BP</div>
+        </div>
+        
+        <div class="adnetwork-stat-card">
+            <h3><?php _e('Shimly', 'adnetwork'); ?></h3>
+            <div class="adnetwork-stat-number"><?php echo number_format($profile->balance_sh ?? 0, 2); ?> SH</div>
         </div>
         
         <div class="adnetwork-stat-card">

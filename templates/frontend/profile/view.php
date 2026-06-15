@@ -25,8 +25,10 @@ $updated = isset($_GET['profile_updated']);
             <p><strong><?php _e('Username:', 'adnetwork'); ?></strong> <?php echo esc_html($user->user_login); ?></p>
             <p><strong><?php _e('Email:', 'adnetwork'); ?></strong> <?php echo esc_html($user->user_email); ?></p>
             <p><strong><?php _e('Role:', 'adnetwork'); ?></strong> <?php echo esc_html(ucfirst($profile->role ?? 'member')); ?></p>
-            <p><strong><?php _e('Balance:', 'adnetwork'); ?></strong> <?php echo number_format($profile->balance ?? 0, 2); ?> €</p>
-            <p><strong><?php _e('GSC Balance:', 'adnetwork'); ?></strong> <?php echo number_format($profile->gsc_balance ?? 0, 8); ?> GSC</p>
+            <p><strong><?php _e('CashPoints (CP):', 'adnetwork'); ?></strong> <?php echo number_format($profile->balance_cp ?? 0, 2); ?> CP</p>
+            <p><strong><?php _e('GoldSurferCoins (GSC):', 'adnetwork'); ?></strong> <?php echo number_format($profile->balance_gsc ?? 0, 8); ?> GSC</p>
+            <p><strong><?php _e('Boost Punkte (BP):', 'adnetwork'); ?></strong> <?php echo number_format($profile->balance_bp ?? 0, 0); ?> BP</p>
+            <p><strong><?php _e('Shimly (SH):', 'adnetwork'); ?></strong> <?php echo number_format($profile->balance_sh ?? 0, 2); ?> SH</p>
             <p><strong><?php _e('Referral Code:', 'adnetwork'); ?></strong> <?php echo esc_html($profile->referral_code ?? ''); ?></p>
         </div>
         

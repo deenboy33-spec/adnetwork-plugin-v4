@@ -15,7 +15,11 @@ if (isset($_POST['adnetwork_settings_nonce']) && wp_verify_nonce($_POST['adnetwo
     $settings->setMultiple([
         'network_name' => sanitize_text_field($_POST['network_name'] ?? ''),
         'project_email' => sanitize_email($_POST['project_email'] ?? ''),
-        'currency' => sanitize_text_field($_POST['currency'] ?? 'EUR'),
+        'currency_main' => sanitize_text_field($_POST['currency_main'] ?? 'CP'),
+        'start_balance_cp' => floatval($_POST['start_balance_cp'] ?? 0),
+        'start_balance_gsc' => floatval($_POST['start_balance_gsc'] ?? 0),
+        'start_balance_bp' => intval($_POST['start_balance_bp'] ?? 0),
+        'start_balance_sh' => floatval($_POST['start_balance_sh'] ?? 0),
         'maintenance_mode' => isset($_POST['maintenance_mode']),
         'user_approval' => sanitize_text_field($_POST['user_approval'] ?? 'auto'),
         'seo_urls' => isset($_POST['seo_urls']),
@@ -48,12 +52,23 @@ if (isset($_POST['adnetwork_settings_nonce']) && wp_verify_nonce($_POST['adnetwo
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="currency"><?php _e('Currency', 'adnetwork'); ?></label></th>
+                <th scope="row"><label for="currency_main"><?php _e('Main Currency', 'adnetwork'); ?></label></th>
                 <td>
-                    <select id="currency" name="currency">
-                        <option value="EUR" <?php selected($settings->get('currency'), 'EUR'); ?>>EUR (€)</option>
-                        <option value="USD" <?php selected($settings->get('currency'), 'USD'); ?>>USD ($)</option>
+                    <select id="currency_main" name="currency_main">
+                        <option value="CP" <?php selected($settings->get('currency_main'), 'CP'); ?>>CP - CashPoints</option>
+                        <option value="GSC" <?php selected($settings->get('currency_main'), 'GSC'); ?>>GSC - GoldSurferCoins</option>
+                        <option value="BP" <?php selected($settings->get('currency_main'), 'BP'); ?>>BP - Boost Punkte</option>
+                        <option value="SH" <?php selected($settings->get('currency_main'), 'SH'); ?>>SH - Shimly</option>
                     </select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e('Start Balances (New Users)', 'adnetwork'); ?></th>
+                <td>
+                    <p><label>CP: <input type="number" name="start_balance_cp" value="<?php echo esc_attr($settings->get('start_balance_cp')); ?>" step="0.01"></label></p>
+                    <p><label>GSC: <input type="number" name="start_balance_gsc" value="<?php echo esc_attr($settings->get('start_balance_gsc')); ?>" step="0.00000001"></label></p>
+                    <p><label>BP: <input type="number" name="start_balance_bp" value="<?php echo esc_attr($settings->get('start_balance_bp')); ?>" step="1"></label></p>
+                    <p><label>SH: <input type="number" name="start_balance_sh" value="<?php echo esc_attr($settings->get('start_balance_sh')); ?>" step="0.01"></label></p>
                 </td>
             </tr>
             <tr>

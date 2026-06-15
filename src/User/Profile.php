@@ -120,11 +120,16 @@ class Profile {
     }
     
     /**
-     * Guthaben abrufen
+     * Guthaben abrufen (alle Währungen)
      */
-    public function getBalance(int $user_id): float {
+    public function getBalance(int $user_id, string $currency = 'cp'): float {
         $profile = $this->getProfile($user_id);
-        return $profile ? (float) $profile->balance : 0;
+        if (!$profile) {
+            return 0;
+        }
+        
+        $field = 'balance_' . strtolower($currency);
+        return (float) ($profile->$field ?? 0);
     }
     
     /**
