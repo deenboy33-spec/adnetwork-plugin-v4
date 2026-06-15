@@ -1,0 +1,54 @@
+/* Breadcrumbs */
+
+.adnetwork-breadcrumbs {
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.breadcrumbs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 14px;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item a {
+    color: #2271b1;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb-item a:hover {
+    color: #135e96;
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #999;
+}
+
+.breadcrumb-current {
+    color: #666;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .adnetwork-breadcrumbs {
+        font-size: 12px;
+    }
+    
+    .breadcrumb-separator {
+        margin: 0 5px;
+    }
+}

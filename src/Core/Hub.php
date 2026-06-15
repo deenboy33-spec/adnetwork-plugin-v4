@@ -95,6 +95,7 @@ class Hub {
         ob_start();
         ?>
         <div class="adnetwork-hub-container">
+            [adnetwork_breadcrumbs]
             <h2><?php echo esc_html($hub['title']); ?></h2>
             <p class="hub-description"><?php echo esc_html($hub['description']); ?></p>
             

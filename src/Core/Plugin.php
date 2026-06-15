@@ -48,6 +48,7 @@ class Plugin {
         $this->logger = new Logger();
         $this->modules = new ModuleManager($this);
         $this->hub = new Hub();
+        $this->breadcrumbs = new Breadcrumbs();
     }
     
     /**
@@ -136,6 +137,13 @@ class Plugin {
         wp_enqueue_style(
             'adnetwork-hub',
             ADN_PLUGIN_URL . 'assets/css/hub.css',
+            [],
+            ADN_VERSION
+        );
+        
+        wp_enqueue_style(
+            'adnetwork-breadcrumbs',
+            ADN_PLUGIN_URL . 'assets/css/breadcrumbs.css',
             [],
             ADN_VERSION
         );
