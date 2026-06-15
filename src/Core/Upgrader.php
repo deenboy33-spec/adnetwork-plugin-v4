@@ -34,15 +34,18 @@ class Upgrader {
      */
     public static function upgrade(): void {
         $instance = new self();
-        $instance->updateExistingPages();
+        
+        // 1. Alte Shortcodes in ALLEN Seiten ersetzen
+        $instance->updateAllPages();
+        
+        // 2. Fehlende Seiten erstellen
         $instance->createMissingPages();
-        $instance->updatePageURLs();
     }
     
     /**
-     * Bestehende Seiten aktualisieren (Shortcodes ersetzen)
+     * Alle Seiten nach alten Shortcodes durchsuchen und ersetzen
      */
-    private function updateExistingPages(): void {
+    private function updateAllPages(): void {
         $pages = get_posts([
             'post_type' => 'page',
             'posts_per_page' => -1,
@@ -72,30 +75,10 @@ class Upgrader {
     }
     
     /**
-     * Fehlende Seiten erstellen
+     * Fehlende Seiten erstellen (nur wenn nicht vorhanden)
      */
     private function createMissingPages(): void {
         $installer = new Installer();
         $installer->createPages();
-    }
-    
-    /**
-     * Seiten-URLs aktualisieren
-     */
-    private function updatePageURLs(): void {
-        $pages = get_option('adnetwork_pages', []);
-        $updated = false;
-        
-        foreach ($pages as $key => $pageId) {
-            $page = get_post($pageId);
-            if ($page) {
-                // URL hat sich möglicherweise geändert
-                $updated = true;
-            }
-        }
-        
-        if ($updated) {
-            update_option('adnetwork_pages', $pages);
-        }
     }
 }

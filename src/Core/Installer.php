@@ -131,10 +131,35 @@ class Installer {
             
             if ($oldPage) {
                 // Alte Seile aktualisieren statt neue zu erstellen
+                // Shortcodes ersetzen
+                $content = $oldPage->post_content;
+                $shortcodeMap = [
+                    '[wf_login]' => '[adnetwork_login]',
+                    '[wf_register]' => '[adnetwork_register]',
+                    '[wf_profile]' => '[adnetwork_profile]',
+                    '[wf_account]' => '[adnetwork_account]',
+                    '[wf_stats]' => '[adnetwork_stats]',
+                    '[wf_campaigns]' => '[adnetwork_campaigns]',
+                    '[wf_publisher]' => '[adnetwork_publisher]',
+                    '[wf_surfbar]' => '[adnetwork_surfbar]',
+                    '[wf_click4win]' => '[adnetwork_click4win]',
+                    '[wf_luckywheel]' => '[adnetwork_luckywheel]',
+                    '[wf_referrals]' => '[adnetwork_referrals]',
+                    '[wf_balance]' => '[adnetwork_balance]',
+                    '[wf_payout]' => '[adnetwork_payout]',
+                    '[wf_faq]' => '[adnetwork_faq]',
+                    '[wf_contact]' => '[adnetwork_contact]',
+                ];
+                
+                foreach ($shortcodeMap as $old => $new) {
+                    $content = str_replace($old, $new, $content);
+                }
+                
                 wp_update_post([
                     'ID' => $oldPage->ID,
                     'post_name' => $slug,
                     'post_title' => $pageData['title'],
+                    'post_content' => $content,
                 ]);
                 $createdPages[$key] = $oldPage->ID;
                 continue;
