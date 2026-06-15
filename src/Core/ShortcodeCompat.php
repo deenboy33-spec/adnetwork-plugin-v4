@@ -21,6 +21,9 @@ class ShortcodeCompat {
         // Hub / Paid4 Bereich
         add_shortcode('wf_hub', [$this, 'renderHub']);
         
+        // GSC Info
+        add_shortcode('wf_gsc_info', [$this, 'renderGSCInfo']);
+        
         // Alte Login/Register (Fallback)
         add_shortcode('wf_login', [$this, 'renderLogin']);
         add_shortcode('wf_register', [$this, 'renderRegister']);
@@ -67,6 +70,13 @@ class ShortcodeCompat {
         </div>
         <?php
         return ob_get_clean();
+    }
+    
+    /**
+     * GSC Info (Alias)
+     */
+    public function renderGSCInfo($atts): string {
+        return do_shortcode('[adnetwork_gsc_info]');
     }
     
     /**
